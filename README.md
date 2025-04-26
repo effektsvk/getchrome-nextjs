@@ -1,6 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# getchro.me
 
-## Getting Started
+A simple web application that allows users to install Google Chrome with a single PowerShell command. Visit [getchro.me](https://getchro.me) to use it.
+
+## Features
+
+- 🚀 **Fast & Simple**: Install Chrome without needing a browser
+- 🔄 **Latest Version**: Always installs the current Chrome release
+- 🤫 **Silent Install**: No clicks or prompts needed
+- 💼 **IT Friendly**: Perfect for new computer setup
+
+## How It Works
+
+1. Run the PowerShell command: `irm getchro.me | iex`
+2. Our server detects PowerShell via User-Agent and serves a PowerShell script
+3. Chrome installs automatically and silently
+
+## Tech Stack
+
+- [Next.js](https://nextjs.org) - React framework
+- [Tailwind CSS](https://tailwindcss.com) - Styling
+- [shadcn/ui](https://ui.shadcn.com) - UI components
+- [PostHog](https://posthog.com) - Analytics
+
+## Development
 
 First, run the development server:
 
@@ -16,9 +38,22 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env.local` file with the following variables:
+
+```
+NEXT_PUBLIC_POSTHOG_KEY=your_posthog_key
+NEXT_PUBLIC_POSTHOG_HOST=your_posthog_host
+```
+
+## License
+
+MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Author
+
+Made with ❤️ by [Erik](https://github.com/effektsvk)
 
 ## Learn More
 
