@@ -48,7 +48,7 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  --background: black;
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -121,5 +121,12 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Ensure black background during rubber band effect */
+@supports (-webkit-overflow-scrolling: touch) {
+  body {
+    background-color: var(--background);
   }
 }
