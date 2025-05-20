@@ -5,10 +5,17 @@ import { Chrome, Terminal, ArrowRight, Copy } from "lucide-react"
 import { useState } from "react"
 
 export default function Home() {
+  const [tab, setTab] = useState<'windows' | 'curl'>('windows')
   const [copied, setCopied] = useState(false)
 
+  const commands: Record<'windows' | 'curl', string> = {
+    windows: 'irm getchro.me | iex',
+    curl: 'curl getchro.me | bash',
+  }
+
   const copyCommand = () => {
-    navigator.clipboard.writeText("irm getchro.me | iex")
+    const command = commands[tab]
+    navigator.clipboard.writeText(command)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
@@ -32,9 +39,21 @@ export default function Home() {
           <Card className="mb-8 border-zinc-800 bg-zinc-950/50 overflow-hidden">
             <CardContent className="p-0">
               <div className="bg-zinc-900 px-4 py-2 border-b border-zinc-800 flex items-center justify-between">
-                <div className="flex items-center">
-                  <Terminal className="h-4 w-4 mr-2 text-zinc-400" />
-                  <span className="text-sm text-zinc-400">PowerShell</span>
+                <div className="flex space-x-4">
+                  <button
+                    onClick={() => { setTab('windows'); setCopied(false) }}
+                    className={`flex items-center text-sm px-3 py-1 font-medium ${tab === 'windows' ? 'text-white border-b-2 border-blue-500' : 'text-zinc-400 hover:text-zinc-200'} transition-colors`}
+                  >
+                    <Terminal className="h-4 w-4 mr-1" />
+                    <span>Windows</span>
+                  </button>
+                  <button
+                    onClick={() => { setTab('curl'); setCopied(false) }}
+                    className={`flex items-center text-sm px-3 py-1 font-medium ${tab === 'curl' ? 'text-white border-b-2 border-blue-500' : 'text-zinc-400 hover:text-zinc-200'} transition-colors`}
+                  >
+                    <Terminal className="h-4 w-4 mr-1" />
+                    <span>curl</span>
+                  </button>
                 </div>
                 <button
                   onClick={copyCommand}
@@ -46,7 +65,9 @@ export default function Home() {
                 </button>
               </div>
               <div className="p-6">
-                <pre className="font-mono text-lg text-blue-500 overflow-x-auto">irm getchro.me | iex</pre>
+                <pre className="font-mono text-lg text-blue-500 overflow-x-auto">
+                  {commands[tab]}
+                </pre>
               </div>
             </CardContent>
           </Card>
