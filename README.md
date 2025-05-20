@@ -1,6 +1,9 @@
 # getchro.me
 
-A simple web application that allows users to install Google Chrome with a single PowerShell command. Visit [getchro.me](https://getchro.me) to use it.
+A simple web application that allows users to install Google Chrome with a single command. Visit [getchro.me](https://getchro.me) to use it.
+
+- **Windows**: `irm getchro.me | iex` (PowerShell)
+- **curl**: `curl getchro.me | bash`
 
 ## Features
 
@@ -11,8 +14,10 @@ A simple web application that allows users to install Google Chrome with a singl
 
 ## How It Works
 
-1. Run the PowerShell command: `irm getchro.me | iex`
-2. Our server detects PowerShell via User-Agent and serves a PowerShell script
+1. Run the installer command:
+   - **Windows**: `irm getchro.me | iex`
+   - **curl**: `curl getchro.me | bash`
+2. Our server detects the User-Agent (`PowerShell` or `curl`) and serves the corresponding installation script
 3. Chrome installs automatically and silently
 
 ## Tech Stack

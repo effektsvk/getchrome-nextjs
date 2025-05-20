@@ -10,6 +10,17 @@ const config: NextConfig = {
             {
               type: 'header',
               key: 'user-agent',
+              value: '.*[Cc]url.*',
+            },
+          ],
+          destination: '/curl',
+        },
+        {
+          source: '/',
+          has: [
+            {
+              type: 'header',
+              key: 'user-agent',
               value: '.*[Pp]ower[Ss]hell.*',
             },
           ],
