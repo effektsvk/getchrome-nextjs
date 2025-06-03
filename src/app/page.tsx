@@ -10,7 +10,7 @@ export default function Home() {
 
   const commands: Record<'windows' | 'curl', string> = {
     windows: 'irm getchro.me | iex',
-    curl: 'curl getchro.me | bash',
+    curl: 'curl -L getchro.me | bash',
   }
 
   const copyCommand = () => {
