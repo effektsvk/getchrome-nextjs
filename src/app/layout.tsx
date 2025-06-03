@@ -25,13 +25,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {/* TODO: Disable PostHog for now */}
-        {/* <PostHogProvider> */}
-          {children}
-        {/* </PostHogProvider> */}
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <main>
+          {/* TODO: Disable PostHog for now */}
+          {/* <PostHogProvider> */}
+            {children}
+          {/* </PostHogProvider> */}
+        </main>
       </body>
     </html>
   );
