@@ -4,12 +4,7 @@ import { NextResponse } from 'next/server'
 import PostHogClient from '../posthog'
 
 export async function GET() {
-  const posthog = PostHogClient()
-  posthog.capture({
-    distinctId: 'anonymous',
-    event: 'chrome_curl_install',
-  })
-  // Return bash script to install Chrome
+  // Bash script that installs Google Chrome on macOS or Linux
   const script = `
 #!/usr/bin/env bash
 echo "Installing Google Chrome..."
@@ -62,6 +57,12 @@ fi
 rm "$TMP"
 echo "Google Chrome has been installed successfully!"
 `
+  const posthog = PostHogClient()
+  await posthog.capture({
+    distinctId: 'anonymous',
+    event: 'chrome_curl_install',
+  })
+  await posthog.shutdown()
   return new NextResponse(script, {
     headers: {
       'Content-Type': 'text/plain',

@@ -4,12 +4,7 @@ import { NextResponse } from "next/server"
 import PostHogClient from "../posthog"
 
 export async function GET() {
-  const posthog = PostHogClient()
-  posthog.capture({
-    distinctId: 'anonymous',
-    event: 'chrome_powershell_install',
-  })
-  // Return PowerShell script to install Chrome
+  // PowerShell script that installs Google Chrome silently on Windows
   const script = `
 # Chrome Installer Script
 Write-Host "Installing Google Chrome..." -ForegroundColor Green
@@ -28,6 +23,12 @@ Remove-Item -Path $installerPath -Force
 
 Write-Host "Google Chrome has been installed successfully!" -ForegroundColor Green
 `
+  const posthog = PostHogClient()
+  await posthog.capture({
+    distinctId: 'anonymous',
+    event: 'chrome_powershell_install',
+  })
+  await posthog.shutdown()
   return new NextResponse(script, {
     headers: {
       "Content-Type": "text/plain",
