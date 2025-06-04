@@ -27,14 +27,14 @@ export default function Home() {
         <header>
           <div className="mb-8 text-center">
             <div className="flex justify-center mb-4">
-              <Chrome className="h-12 w-12 text-blue-500" />
+              <Chrome className="h-12 w-12 text-blue-500" focusable="false" />
             </div>
             <h1 className="text-3xl font-bold tracking-tight mb-2">getchro.me</h1>
             <p className="text-zinc-400">Install Chrome with a single PowerShell command</p>
           </div>
         </header>
 
-        <main>
+        <section>
           {/* Main Command Card */}
           <Card className="mb-8 border-zinc-800 bg-zinc-950/50 overflow-hidden">
             <CardContent className="p-0">
@@ -44,14 +44,14 @@ export default function Home() {
                     onClick={() => { setTab('windows'); setCopied(false) }}
                     className={`flex items-center text-sm px-3 py-1 font-medium ${tab === 'windows' ? 'text-white border-b-2 border-blue-500' : 'text-zinc-400 hover:text-zinc-200'} transition-colors`}
                   >
-                    <Terminal className="h-4 w-4 mr-1" />
+                    <Terminal className="h-4 w-4 mr-1" focusable="false" />
                     <span>Windows</span>
                   </button>
                   <button
                     onClick={() => { setTab('curl'); setCopied(false) }}
                     className={`flex items-center text-sm px-3 py-1 font-medium ${tab === 'curl' ? 'text-white border-b-2 border-blue-500' : 'text-zinc-400 hover:text-zinc-200'} transition-colors`}
                   >
-                    <Terminal className="h-4 w-4 mr-1" />
+                    <Terminal className="h-4 w-4 mr-1" focusable="false" />
                     <span>curl</span>
                   </button>
                 </div>
@@ -61,7 +61,7 @@ export default function Home() {
                   aria-label="Copy command"
                 >
                   {copied ? <span className="text-xs text-green-500 mr-1">Copied!</span> : null}
-                  <Copy className="h-4 w-4" />
+                  <Copy className="h-4 w-4" focusable="false" />
                 </button>
               </div>
               <div className="p-6">
@@ -112,28 +112,28 @@ export default function Home() {
               <h2 className="text-xl font-semibold mb-4 text-white">Why Use This?</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex items-start">
-                  <ArrowRight className="h-5 w-5 text-blue-500 mr-2 mt-0.5" />
+                  <ArrowRight className="h-5 w-5 text-blue-500 mr-2 mt-0.5" focusable="false" />
                   <div>
                     <p className="text-zinc-300 font-medium">Fast & Simple</p>
                     <p className="text-sm text-zinc-400">No browser needed to download Chrome</p>
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <ArrowRight className="h-5 w-5 text-blue-500 mr-2 mt-0.5" />
+                  <ArrowRight className="h-5 w-5 text-blue-500 mr-2 mt-0.5" focusable="false" />
                   <div>
                     <p className="text-zinc-300 font-medium">Latest Version</p>
                     <p className="text-sm text-zinc-400">Always installs the current release</p>
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <ArrowRight className="h-5 w-5 text-blue-500 mr-2 mt-0.5" />
+                  <ArrowRight className="h-5 w-5 text-blue-500 mr-2 mt-0.5" focusable="false" />
                   <div>
                     <p className="text-zinc-300 font-medium">Silent Install</p>
                     <p className="text-sm text-zinc-400">No clicks or prompts needed</p>
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <ArrowRight className="h-5 w-5 text-blue-500 mr-2 mt-0.5" />
+                  <ArrowRight className="h-5 w-5 text-blue-500 mr-2 mt-0.5" focusable="false" />
                   <div>
                     <p className="text-zinc-300 font-medium">IT Friendly</p>
                     <p className="text-sm text-zinc-400">Perfect for new computer setup</p>
@@ -142,7 +142,7 @@ export default function Home() {
               </div>
             </CardContent>
           </Card>
-        </main>
+        </section>
 
         {/* Footer */}
         <footer className="text-center text-sm text-zinc-400 space-y-1">
