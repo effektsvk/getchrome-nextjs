@@ -1,9 +1,12 @@
 'use server'
 
-import { NextResponse } from 'next/server'
+import { track } from '@vercel/analytics/server'
+import { NextResponse, after } from 'next/server'
 import PostHogClient from '../posthog'
 
-export async function GET() {
+export async function GET(request: Request) {
+  const userAgent = request.headers.get('user-agent') ?? 'unknown'
+
   // Bash script that installs Google Chrome on macOS or Linux
   const script = `
 #!/usr/bin/env bash
@@ -57,12 +60,23 @@ fi
 rm "$TMP"
 echo "Google Chrome has been installed successfully!"
 `
-  const posthog = PostHogClient()
-  await posthog.capture({
-    distinctId: 'anonymous',
-    event: 'chrome_curl_install',
+  after(async () => {
+    const posthog = PostHogClient()
+    const event = {
+      userAgent,
+    }
+
+    await Promise.all([
+      track('chrome_curl_install', event),
+      posthog.capture({
+        distinctId: 'anonymous',
+        event: 'chrome_curl_install',
+        properties: event,
+      }),
+    ])
+
+    await posthog.shutdown()
   })
-  await posthog.shutdown()
   return new NextResponse(script, {
     headers: {
       'Content-Type': 'text/plain',

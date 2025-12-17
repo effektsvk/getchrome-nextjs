@@ -1,9 +1,12 @@
 'use server'
 
-import { NextResponse } from "next/server"
+import { track } from "@vercel/analytics/server"
+import { NextResponse, after } from "next/server"
 import PostHogClient from "../posthog"
 
-export async function GET() {
+export async function GET(request: Request) {
+  const userAgent = request.headers.get("user-agent") ?? "unknown"
+
   // PowerShell script that installs Google Chrome silently on Windows
   const script = `
 # Chrome Installer Script
@@ -23,12 +26,23 @@ Remove-Item -Path $installerPath -Force
 
 Write-Host "Google Chrome has been installed successfully!" -ForegroundColor Green
 `
-  const posthog = PostHogClient()
-  await posthog.capture({
-    distinctId: 'anonymous',
-    event: 'chrome_powershell_install',
+  after(async () => {
+    const posthog = PostHogClient()
+    const event = {
+      userAgent,
+    }
+
+    await Promise.all([
+      track('chrome_powershell_install', event),
+      posthog.capture({
+        distinctId: 'anonymous',
+        event: 'chrome_powershell_install',
+        properties: event,
+      }),
+    ])
+
+    await posthog.shutdown()
   })
-  await posthog.shutdown()
   return new NextResponse(script, {
     headers: {
       "Content-Type": "text/plain",
